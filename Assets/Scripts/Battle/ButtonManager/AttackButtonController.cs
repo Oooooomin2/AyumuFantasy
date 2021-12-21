@@ -24,17 +24,17 @@ public class AttackButtonController : MonoBehaviour
         var nowPlayerLocation = Player.transform.position;
         var playerAttackLocation = Target.transform.position - new Vector3(0.0f, 0.0f, -5.0f);
 
-        var locations = new PlayerContext
+        var locations = new TurnCharactorContext
         {
             PlayerAttackLocation = playerAttackLocation,
             NowPlayerLocation = nowPlayerLocation,
-            Attack = Random.Range(Playermanager.attack - 15, Playermanager.attack + 15)
+            Attack = Random.Range(PlayerManager.attack - 15, PlayerManager.attack + 15)
         };
         BattleManager.TurnOrders.Add(Player, locations);
     }
 }
 
-public class PlayerContext
+public class TurnCharactorContext
 {
     public Vector3 PlayerAttackLocation { get; set; }
     public Vector3 NowPlayerLocation { get; set; }

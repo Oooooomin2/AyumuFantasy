@@ -18,6 +18,8 @@ public class SlideController : MonoBehaviour
     
     void Update()
     {
+        if (BattleManager.IsDuringMotion) return;
+
         playerSlider.value += 0.002f;
         if(playerSlider.value == 1 && !AttackButtonController.hasPushButton)
         {

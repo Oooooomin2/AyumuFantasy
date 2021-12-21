@@ -1,10 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Playermanager : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
-    public Collider Collider;
+    public GameObject Target;
+    public AudioClip AttackSound;
+
     int maxHp = 100;
     public static int hp = 100;
     int maxMp = 36;
@@ -14,7 +18,6 @@ public class Playermanager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        HideCollider();
     }
 
     // Update is called once per frame
@@ -23,13 +26,12 @@ public class Playermanager : MonoBehaviour
         
     }
 
-    public void HideCollider()
-    {
-        Collider.enabled = false;
-    }
-
     public void ActiveCollider()
     {
-        Collider.enabled = true;
+        var animator = Target.GetComponent<Animator>();
+        var audioSource = Target.GetComponent<EnemyManager>().AudioSource;
+        var damageText = Target.GetComponent<EnemyManager>().DamageText;
+        var particleSystem = Target.GetComponent<ParticleSystem>();
+        new GameObject("EnemyManager").AddComponent<EnemyManager>().GetHit(animator, audioSource, AttackSound, particleSystem, damageText);
     }
 }
