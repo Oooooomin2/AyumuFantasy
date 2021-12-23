@@ -9,7 +9,6 @@ public class BattleManager : MonoBehaviour
 {
     public static Dictionary<GameObject, TurnCharactorContext> TurnOrders;
     public Canvas Canvas;
-    public Slider PlayerSlider;
 
     public static bool IsDuringMotion;
     public static bool isMoveToEnemy;
@@ -55,12 +54,9 @@ public class BattleManager : MonoBehaviour
         {
             turnCharactor.Key.transform.position = Vector3.MoveTowards(turnCharactor.Key.transform.position, turnCharactor.Value.NowPlayerLocation, 0.6f);
             float distanceBaseLocation = (turnCharactor.Value.NowPlayerLocation - turnCharactor.Key.transform.position).sqrMagnitude;
-            Debug.Log(distanceBaseLocation);
             if(distanceBaseLocation <= 0.01f)
             {
                 turnCharactor.Key.GetComponent<Animator>().SetBool("isYourTurn", false);
-                PlayerSlider.value = 0.0f;
-                AttackButtonController.hasPushButton = false;
                 IsDuringMotion = false;
             }
         }

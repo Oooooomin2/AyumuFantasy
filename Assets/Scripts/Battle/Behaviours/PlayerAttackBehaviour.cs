@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAttackBehaviour : StateMachineBehaviour
 {
@@ -23,6 +24,8 @@ public class PlayerAttackBehaviour : StateMachineBehaviour
     {
         //animator.GetComponent<Playermanager>().Target.GetComponent<Collider>().enabled = false;
         BattleManager.hasMotioned = false;
+        animator.GetComponent<PlayerManager>().PlayerSlider.value = 0.0f;
+        AttackButtonController.hasPushButton = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

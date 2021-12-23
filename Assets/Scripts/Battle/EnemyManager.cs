@@ -7,10 +7,9 @@ using UnityEngine.UI;
 public class EnemyManager : MonoBehaviour
 {
     public GameObject Target;
-
     public AudioSource AudioSource;
+    public AudioClip AttackSound;
     public AudioClip DieSound;
-    public Text DamageText;
 
     public int MaxHp = 200;
     public static int hp = 200;
@@ -20,7 +19,6 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         hp = MaxHp;
-        DamageText.enabled = false;
 
         EnemyAttackGage = UnityEngine.Random.Range(0.0f, 1.0f);
     }
@@ -38,6 +36,7 @@ public class EnemyManager : MonoBehaviour
         {
             var nowEnemyLocation = transform.position;
             var enemyAttackLocation = Target.transform.position - new Vector3(0.0f, 0.0f, 3.5f);
+            Debug.Log(Target);
 
             var locations = new TurnCharactorContext
             {
@@ -45,7 +44,7 @@ public class EnemyManager : MonoBehaviour
                 NowPlayerLocation = nowEnemyLocation,
                 Attack = UnityEngine.Random.Range(Attack - 5, Attack + 5)
             };
-            BattleManager.TurnOrders.Add(this.gameObject, locations);
+            BattleManager.TurnOrders.Add(gameObject, locations);
             EnemyAttackGage = 0;
         }
     }
@@ -53,17 +52,17 @@ public class EnemyManager : MonoBehaviour
     public void AttackMotion()
     {
         var animator = Target.GetComponent<Animator>();
-        //var audioSource = Target.AudioSource;
-        //var damageText = Target.DamageText;
+        var audioSource = Target.GetComponent<AudioSource>();
         //var particleSystem = Target.GetComponent<ParticleSystem>();
-        Debug.Log("ìGÇÃçUåÇÅI");
-        //new GameObject("PlayerManager").AddComponent<Playermanager>().GetHit(animator, audioSource, AttackSound, particleSystem, damageText);
+        var damageText = Target.transform.Find("Canvas/DamageText").gameObject.GetComponent<Text>();
+        Target.GetComponent<PlayerManager>().GetHit(animator, audioSource, AttackSound, null, damageText);
     }
 
     public void GetHit(Animator animator, AudioSource audioSource, AudioClip audioClip, ParticleSystem particleSystem, Text damageText)
     {
         var damage = BattleManager.TurnOrders.First().Value.Attack;
         hp -= damage;
+        Debug.Log(hp);
         if (hp <= 0)
         {
             animator.SetBool("isDie", true);
@@ -103,8 +102,8 @@ public class EnemyManager : MonoBehaviour
 
     private void DamageTextAnimationDie()
     {
-        DamageText.enabled = true;
-        DamageText.text = BattleManager.TurnOrders.First().Value.Attack.ToString();
+        transform.Find("Canvas/DamageText").gameObject.GetComponent<Text>().enabled = true;
+        transform.Find("Canvas/DamageText").gameObject.GetComponent<Text>().text = BattleManager.TurnOrders.First().Value.Attack.ToString();
         BattleManager.TurnOrders.Remove(BattleManager.TurnOrders.First().Key);
         BattleManager.isMoveToEnemy = true;
         Invoke("HideDamageText", 1.0f);
