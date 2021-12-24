@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject Target;
     public AudioClip AttackSound;
     public Slider PlayerSlider;
+    public Text PlayerHpText;
 
     int maxHp = 100;
     public static int hp = 100;
@@ -47,17 +48,24 @@ public class PlayerManager : MonoBehaviour
         hp -= damage;
         if (hp <= 0)
         {
+            hp = 0;
+            PlayerHpText.text = hp.ToString();
+            StartCoroutine(DelayCoroutine(1f, () =>
+            {
+                damageText.enabled = true;
+                damageText.text = BattleManager.TurnOrders.First().Value.Attack.ToString();
+            }));
             animator.SetBool("isDie", true);
-            //particleSystem.Play();
+            particleSystem.Play();
             audioSource.PlayOneShot(audioClip);
-            Invoke("DamageTextAnimationDie", 1.0f);
             BattleManager.hasEndBattle = true;
-            BattleManager.isVictory = true;
+            BattleManager.isLose = true;
             return;
         }
+        PlayerHpText.text = hp.ToString();
         animator.SetTrigger("GetHit");
-        //particleSystem.Play();
-        //audioSource.PlayOneShot(audioClip);
+        particleSystem.Play();
+        audioSource.PlayOneShot(audioClip);
         StartCoroutine(DelayCoroutine(1f, () =>
         {
             damageText.enabled = true;

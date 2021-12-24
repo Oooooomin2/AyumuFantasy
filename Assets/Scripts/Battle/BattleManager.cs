@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,14 @@ public class BattleManager : MonoBehaviour
     public static Dictionary<GameObject, TurnCharactorContext> TurnOrders;
     public Canvas Canvas;
 
+    [SerializeField]
+    Fade fade = null;
+
     public static bool IsDuringMotion;
     public static bool isMoveToEnemy;
     public static bool hasMotioned;
     public static bool isVictory;
+    public static bool isLose;
     public static bool hasEndBattle;
 
     void Start()
@@ -23,6 +28,7 @@ public class BattleManager : MonoBehaviour
         hasMotioned = false;
         hasEndBattle = false;
         isVictory = false;
+        isLose = false;
         TurnOrders = new Dictionary<GameObject, TurnCharactorContext>();
     }
 
@@ -63,7 +69,15 @@ public class BattleManager : MonoBehaviour
 
         if (hasEndBattle)
         {
-            Invoke("MoveToEndOfBattle", 3.0f);
+            if (isVictory)
+            {
+                Invoke("MoveToEndOfBattle", 3.0f);
+            }
+
+            if (isLose)
+            {
+                Invoke("MoveToEndOfBattle", 1.0f);
+            }
         }
     }
 
@@ -72,6 +86,14 @@ public class BattleManager : MonoBehaviour
         if (isVictory)
         {
             SceneManager.LoadScene("EndBattle");
+        }
+
+        if (isLose)
+        {
+            fade.FadeIn(1.0f, () =>
+            {
+                SceneManager.LoadScene("GameOver");
+            });
         }
     }
 }

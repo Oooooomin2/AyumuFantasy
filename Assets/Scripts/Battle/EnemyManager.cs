@@ -13,7 +13,7 @@ public class EnemyManager : MonoBehaviour
 
     public int MaxHp = 200;
     public static int hp = 200;
-    int Attack = 15;
+    int Attack = 10000;
     float EnemyAttackGage;
 
     void Start()
@@ -53,9 +53,9 @@ public class EnemyManager : MonoBehaviour
     {
         var animator = Target.GetComponent<Animator>();
         var audioSource = Target.GetComponent<AudioSource>();
-        //var particleSystem = Target.GetComponent<ParticleSystem>();
+        var particleSystem = Target.GetComponent<ParticleSystem>();
         var damageText = Target.transform.Find("Canvas/DamageText").gameObject.GetComponent<Text>();
-        Target.GetComponent<PlayerManager>().GetHit(animator, audioSource, AttackSound, null, damageText);
+        Target.GetComponent<PlayerManager>().GetHit(animator, audioSource, AttackSound, particleSystem, damageText);
     }
 
     public void GetHit(Animator animator, AudioSource audioSource, AudioClip audioClip, ParticleSystem particleSystem, Text damageText)
@@ -93,11 +93,6 @@ public class EnemyManager : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
         action?.Invoke();
-    }
-
-    public void BackToIdleLocation()
-    {
-
     }
 
     private void DamageTextAnimationDie()
