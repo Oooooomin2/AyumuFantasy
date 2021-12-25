@@ -29,7 +29,7 @@ public class FieldManager : MonoBehaviour
         var PlayerSpeed = rigidbody.velocity.magnitude;
         var RateEncount = Random.Range(0, 1200);
         if(PlayerSpeed > 0.5f && RateEncount == 50)
-        {;
+        {
             PlayerFieldLocation = Player.transform.position;
             Player.GetComponent<PlayerController>().moveSpeed = 0;
             fade.FadeIn(2.0f, () =>
