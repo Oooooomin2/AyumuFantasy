@@ -13,7 +13,7 @@ public class EnemyManager : MonoBehaviour
 
     public int MaxHp = 200;
     public static int hp = 200;
-    int Attack = 10000;
+    int Attack = 15;
     float EnemyAttackGage;
 
     void Start()
@@ -109,7 +109,7 @@ public class EnemyManager : MonoBehaviour
     private void HideEnemy()
     {
         AudioSource.PlayOneShot(DieSound);
-        Debug.Log("die");
         this.gameObject.transform.Find("Slime").gameObject.SetActive(false);
+        transform.Find("Canvas/DamageText").gameObject.GetComponent<Text>().enabled = false;
     }
 }

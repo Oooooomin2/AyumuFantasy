@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject target;
+    public GameObject Target;
     private Vector3 distance;
 
     void Start()
     {
-        distance = transform.position - target.transform.position;
+        transform.position = Target.transform.position + new Vector3(0.0f, 3.0f, -5.0f);
+        distance = transform.position - Target.transform.position;
     }
 
     void FixedUpdate()
     {
-        transform.position = target.transform.position + distance;
+        transform.position = Target.transform.position + distance;
     }
 }
