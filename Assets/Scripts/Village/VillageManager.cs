@@ -8,6 +8,8 @@ public class VillageManager : MonoBehaviour
     public GameObject Player;
     public static bool isPowerUp = false;
 
+    public Fungus.Flowchart flowchart = null;
+
     bool isTalking = false;
 
     [SerializeField]
@@ -53,9 +55,10 @@ public class VillageManager : MonoBehaviour
     public void PlayerStartTalk()
     {
         isTalking = true;
+        flowchart.SetBooleanVariable("isPowerUp", isPowerUp);
     }
 
-    public void PlayerEndTalk()
+    public void PlayerEndTalk() 
     {
         isTalking = false;
     }

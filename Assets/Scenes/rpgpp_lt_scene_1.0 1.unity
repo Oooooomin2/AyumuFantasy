@@ -9266,6 +9266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 993139471668440498}
+  flowchart: {fileID: 7695095547603690246}
   fade: {fileID: 1852559555570898663}
 --- !u!4 &1304788057
 Transform:
@@ -22043,7 +22044,6 @@ GameObject:
   - component: {fileID: 7695095547603690248}
   - component: {fileID: 7695095547603690247}
   - component: {fileID: 7695095547603690249}
-  - component: {fileID: 7695095547603690250}
   - component: {fileID: 7695095547603690251}
   - component: {fileID: 7695095547603690264}
   - component: {fileID: 7695095547603690263}
@@ -22067,6 +22067,8 @@ GameObject:
   - component: {fileID: 7695095547603690272}
   - component: {fileID: 7695095547603690271}
   - component: {fileID: 7695095547603690270}
+  - component: {fileID: 7695095547603690274}
+  - component: {fileID: 7695095547603690250}
   m_Layer: 0
   m_Name: PT_Lowpoly_Medieval_Armors_Male_Moduar_Free_pack
   m_TagString: Kogoro
@@ -22117,11 +22119,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 31.074486, y: -9.566936}
+  scrollPos: {x: 110.34833, y: 67.04174}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 280
-  zoom: 0.97
+  zoom: 0.94000006
   scrollViewRect:
     serializedVersion: 2
     x: 0
@@ -22129,7 +22131,7 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 7695095547603690251}
+  - {fileID: 7695095547603690248}
   selectedCommands: []
   variables:
   - {fileID: 7695095547603690269}
@@ -22186,14 +22188,14 @@ MonoBehaviour:
     serializedVersion: 2
     x: 102.89455
     y: 281.96384
-    width: 132.47423
+    width: 135.10638
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 0
   blockName: TalkToKogoro
   description: 
-  eventHandler: {fileID: 7695095547603690250}
+  eventHandler: {fileID: 7695095547603690274}
   commandList:
   - {fileID: 7695095547603690268}
   - {fileID: 7695095547603690273}
@@ -22203,6 +22205,7 @@ MonoBehaviour:
   - {fileID: 7695095547603690262}
   - {fileID: 7695095547603690272}
   - {fileID: 7695095547603690271}
+  - {fileID: 7695095547603690250}
   suppressAllAutoSelections: 0
 --- !u!114 &7695095547603690249
 MonoBehaviour:
@@ -22240,15 +22243,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7695095547603690243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3b4d2ce0fcd12448ab6b4492be6ca77, type: 3}
+  m_Script: {fileID: 11500000, guid: 17a200dbd67304446a3019434503338a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentBlock: {fileID: 7695095547603690248}
-  suppressBlockAutoSelect: 0
-  tagFilter:
-  - Player
-  FireOn: 1
-  collisionVar: {fileID: 0}
+  itemId: 25
+  indentLevel: 1
+  targetObject: {fileID: 1304788055}
+  methodName: PlayerEndTalk
+  delay: 0
 --- !u!114 &7695095547603690251
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -22263,9 +22265,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 421.98734
-    y: 206.43292
-    width: 71.64948
+    x: 420.98734
+    y: 205.402
+    width: 72.34042
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -22613,7 +22615,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 425.95642
     y: 344.43292
-    width: 66.49484
+    width: 65.95744
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -22706,7 +22708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scope: 0
-  key: Var
+  key: isPowerUp
   value: 0
 --- !u!114 &7695095547603690270
 MonoBehaviour:
@@ -23144,6 +23146,23 @@ MonoBehaviour:
   vector3Data:
     vector3Ref: {fileID: 0}
     vector3Val: {x: 0, y: 0, z: 0}
+--- !u!114 &7695095547603690274
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7695095547603690243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3b4d2ce0fcd12448ab6b4492be6ca77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBlock: {fileID: 7695095547603690248}
+  suppressBlockAutoSelect: 0
+  tagFilter: []
+  FireOn: 1
+  collisionVar: {fileID: 0}
 --- !u!1 &7776986366781637315
 GameObject:
   m_ObjectHideFlags: 0
