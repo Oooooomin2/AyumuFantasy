@@ -8,10 +8,11 @@ public class FieldManager : MonoBehaviour
     public GameObject Player;
     public static Vector3 PlayerFieldLocation;
 
+    public Fungus.Flowchart flowchart = null;
+
     [SerializeField]
     Fade fade = null;
 
-    // Start is called before the first frame update
     void Start()
     {
         if(PlayerFieldLocation.Equals(new Vector3(0, 0, 0)))
@@ -20,15 +21,14 @@ public class FieldManager : MonoBehaviour
         }
 
         Player.transform.position = PlayerFieldLocation;
+        flowchart.SetBooleanVariable("isPowerUp", VillageManager.isPowerUp);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Rigidbody rigidbody = Player.GetComponent<Rigidbody>();
-        var PlayerSpeed = rigidbody.velocity.magnitude;
+        var playerSpeed = Player.GetComponent<Animator>().GetFloat("Speed");
         var RateEncount = Random.Range(0, 1200);
-        if(PlayerSpeed > 0.5f && RateEncount == 50)
+        if(playerSpeed > 1.0f && RateEncount == 50)
         {
             PlayerFieldLocation = Player.transform.position;
             Player.GetComponent<PlayerController>().moveSpeed = 0;
