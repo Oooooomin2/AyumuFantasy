@@ -1,20 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AttackButtonController : MonoBehaviour
 {
     public GameObject Player;
     public GameObject Panel;
     public GameObject Target;
-    public static bool hasPushButton = false;
-
-    Animator animator;
+    public static bool HasPushButton = false;
 
     public void AttackButton()
     {
-        hasPushButton = true;
+        HasPushButton = true;
         Panel.SetActive(false);
         Invoke("SetAttackContext", 1.0f);
     }
@@ -24,13 +19,13 @@ public class AttackButtonController : MonoBehaviour
         var nowPlayerLocation = Player.transform.position;
         var playerAttackLocation = Target.transform.position - new Vector3(0.0f, 0.0f, -5.0f);
 
-        var locations = new TurnCharactorContext
+        var charactorContext = new TurnCharactorContext
         {
             PlayerAttackLocation = playerAttackLocation,
             NowPlayerLocation = nowPlayerLocation,
-            Attack = Random.Range(PlayerManager.attack - 15, PlayerManager.attack + 15)
+            Attack = Random.Range(PlayerManager.Attack - 15, PlayerManager.Attack + 15)
         };
-        BattleManager.TurnOrders.Add(Player, locations);
+        BattleManager.TurnOrders.Add(Player, charactorContext);
     }
 }
 

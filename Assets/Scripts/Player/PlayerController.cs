@@ -1,26 +1,15 @@
-using Fungus;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    float xSpeed;
-    float zSpeed;
-    public float moveSpeed = 2;
+    public float MoveSpeed = 2;
 
     [SerializeField]
     Fade fade = null;
-
-    Rigidbody rigidbody;
     Animator animator;
 
-    private void Start()
-    {
-        rigidbody = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
-    }
+    private void Start() => animator = GetComponent<Animator>();
 
     private void FixedUpdate()
     {
@@ -36,8 +25,8 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            animator.SetFloat("Speed", moveSpeed);
-            transform.position += transform.forward * 0.03f * moveSpeed;
+            animator.SetFloat("Speed", MoveSpeed);
+            transform.position += transform.forward * 0.03f * MoveSpeed;
         }
         else
         {
@@ -49,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         if(other.tag == "Village")
         {
-            moveSpeed = 0;
+            MoveSpeed = 0;
             fade.FadeIn(1.0f, () =>
             {
                 SceneManager.LoadScene("rpgpp_lt_scene_1.0 1");

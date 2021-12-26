@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,21 +11,11 @@ public class PlayerManager : MonoBehaviour
     public Slider PlayerSlider;
     public Text PlayerHpText;
 
-    int maxHp = 100;
-    public static int hp = 100;
-    int maxMp = 36;
-    public static int mp = 36;
-    public static int attack = 80;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
+    public static int MaxHp = 100;
+    public static int Hp = 100;
+    public static int MaxMp = 36;
+    public static int Mp = 36;
+    public static int Attack = 80;
 
     public void ActiveCollider()
     {
@@ -45,31 +34,38 @@ public class PlayerManager : MonoBehaviour
         Text damageText)
     {
         var damage = BattleManager.TurnOrders.First().Value.Attack;
-        hp -= damage;
-        if (hp <= 0)
+        Hp -= damage;
+
+        if (Hp <= 0)
         {
-            hp = 0;
-            PlayerHpText.text = hp.ToString();
-            StartCoroutine(DelayCoroutine(1f, () =>
-            {
-                damageText.enabled = true;
-                damageText.text = BattleManager.TurnOrders.First().Value.Attack.ToString();
-            }));
+            Hp = 0;
+            PlayerHpText.text = Hp.ToString();
+
             animator.SetBool("isDie", true);
             particleSystem.Play();
             audioSource.PlayOneShot(audioClip);
+
+            StartCoroutine(DelayCoroutine(1f, () =>
+            {
+                damageText.enabled = true;
+                damageText.text = damage.ToString();
+            }));
+
             BattleManager.hasEndBattle = true;
             BattleManager.isLose = true;
             return;
         }
-        PlayerHpText.text = hp.ToString();
+
+        PlayerHpText.text = Hp.ToString();
+
         animator.SetTrigger("GetHit");
         particleSystem.Play();
         audioSource.PlayOneShot(audioClip);
+
         StartCoroutine(DelayCoroutine(1f, () =>
         {
             damageText.enabled = true;
-            damageText.text = BattleManager.TurnOrders.First().Value.Attack.ToString();
+            damageText.text = damage.ToString();
             BattleManager.TurnOrders.Remove(BattleManager.TurnOrders.First().Key);
             BattleManager.isMoveToEnemy = true;
             StartCoroutine(DelayCoroutine(1f, () =>

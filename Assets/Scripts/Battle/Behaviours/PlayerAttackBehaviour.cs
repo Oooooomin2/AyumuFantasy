@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerAttackBehaviour : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //animator.GetComponent<Playermanager>().Target.GetComponent<Collider>().enabled = true;
         BattleManager.hasMotioned = true;
         BattleManager.isMoveToEnemy = false;
     }
@@ -22,10 +18,9 @@ public class PlayerAttackBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //animator.GetComponent<Playermanager>().Target.GetComponent<Collider>().enabled = false;
         BattleManager.hasMotioned = false;
         animator.GetComponent<PlayerManager>().PlayerSlider.value = 0.0f;
-        AttackButtonController.hasPushButton = false;
+        AttackButtonController.HasPushButton = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

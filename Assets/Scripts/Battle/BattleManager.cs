@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
@@ -23,13 +20,14 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
+        TurnOrders = new Dictionary<GameObject, TurnCharactorContext>();
+
         IsDuringMotion = false;
         isMoveToEnemy = true;
         hasMotioned = false;
-        hasEndBattle = false;
         isVictory = false;
         isLose = false;
-        TurnOrders = new Dictionary<GameObject, TurnCharactorContext>();
+        hasEndBattle = false;
     }
 
     void Update()

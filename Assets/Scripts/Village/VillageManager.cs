@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,22 +13,15 @@ public class VillageManager : MonoBehaviour
     [SerializeField]
     Fade fade = null;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (isTalking)
         {
-            Player.GetComponent<PlayerController>().moveSpeed = 0;
+            Player.GetComponent<PlayerController>().MoveSpeed = 0;
             return;
         }
 
-        Player.GetComponent<PlayerController>().moveSpeed = 3.5f;
+        Player.GetComponent<PlayerController>().MoveSpeed = 3.5f;
     }
 
     private void FixedUpdate()
@@ -39,7 +30,7 @@ public class VillageManager : MonoBehaviour
         if(distanceFromCenter > 1000.0f)
         {
             FieldManager.PlayerFieldLocation = new Vector3(59.0f, 0.0f, 135.0f);
-            Player.GetComponent<PlayerController>().moveSpeed = 0;
+            Player.GetComponent<PlayerController>().MoveSpeed = 0;
             fade.FadeIn(0.5f, () =>
             {
                 SceneManager.LoadScene("SampleScene");
@@ -47,10 +38,7 @@ public class VillageManager : MonoBehaviour
         }
     }
 
-    public void PowerUp()
-    {
-        isPowerUp = true;
-    }
+    public void PowerUp() => isPowerUp = true;
 
     public void PlayerStartTalk()
     {
@@ -58,8 +46,5 @@ public class VillageManager : MonoBehaviour
         flowchart.SetBooleanVariable("isPowerUp", isPowerUp);
     }
 
-    public void PlayerEndTalk() 
-    {
-        isTalking = false;
-    }
+    public void PlayerEndTalk() => isTalking = false;
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAttackBehaviour : StateMachineBehaviour
@@ -9,8 +7,6 @@ public class EnemyAttackBehaviour : StateMachineBehaviour
     {
         BattleManager.hasMotioned = true;
         BattleManager.isMoveToEnemy = false;
-        //animator.GetComponent<EnemyManager>().Target.GetComponent<Collider>().isTrigger = true;
-        //animator.GetComponent<Collider>().enabled = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -23,8 +19,6 @@ public class EnemyAttackBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         BattleManager.hasMotioned = false;
-        //animator.GetComponent<EnemyManager>().Target.GetComponent<Collider>().enabled = false;
-        //animator.GetComponent<Collider>().enabled = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

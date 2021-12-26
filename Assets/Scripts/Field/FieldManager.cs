@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class FieldManager : MonoBehaviour
@@ -31,7 +29,7 @@ public class FieldManager : MonoBehaviour
         if(playerSpeed > 1.0f && RateEncount == 50)
         {
             PlayerFieldLocation = Player.transform.position;
-            Player.GetComponent<PlayerController>().moveSpeed = 0;
+            Player.GetComponent<PlayerController>().MoveSpeed = 0;
             fade.FadeIn(2.0f, () =>
             {
                 SceneManager.LoadScene("FightingToSlime");

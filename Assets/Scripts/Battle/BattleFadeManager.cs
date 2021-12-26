@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BattleFadeManager : MonoBehaviour
@@ -11,11 +9,5 @@ public class BattleFadeManager : MonoBehaviour
     {
         fade.cutoutRange = 1;
         fade.FadeOut(0.7f);
-    }
-
-    
-    void Update()
-    {
-        
     }
 }
