@@ -12,81 +12,58 @@ public class BattleManager : MonoBehaviour
     Fade fade = null;
 
     public static bool IsDuringMotion;
-    public static bool isMoveToEnemy;
-    public static bool hasMotioned;
-    public static bool isVictory;
-    public static bool isLose;
-    public static bool hasEndBattle;
+    public static bool IsVictory;
+    public static bool IsLose;
 
     void Start()
     {
         TurnOrders = new Dictionary<GameObject, TurnCharactorContext>();
 
         IsDuringMotion = false;
-        isMoveToEnemy = true;
-        hasMotioned = false;
-        isVictory = false;
-        isLose = false;
-        hasEndBattle = false;
+        IsVictory = false;
+        IsLose = false;
     }
 
     void Update()
     {
         if (!TurnOrders.Any()) return;
-        if (hasMotioned) return;
+        if (IsDuringMotion) return;
 
-        if (hasEndBattle)
+        if (IsVictory)
         {
             Canvas.enabled = false;
         }
 
         var turnCharactor = TurnOrders.First();
-        IsDuringMotion = true;
-        if (isMoveToEnemy)
+
+        if (!IsDuringMotion)
         {
-            turnCharactor.Key.GetComponent<Animator>().SetBool("isYourTurn", true);
-            turnCharactor.Key.transform.position = Vector3.MoveTowards(turnCharactor.Key.transform.position, turnCharactor.Value.PlayerAttackLocation, 0.3f);
-        }
-        
-        float distanceWithEnemy = (turnCharactor.Value.PlayerAttackLocation - turnCharactor.Key.transform.position).sqrMagnitude;
-        if (distanceWithEnemy <= 2.0f && !hasMotioned && isMoveToEnemy)
-        {
+            IsDuringMotion = true;
             turnCharactor.Key.GetComponent<Animator>().SetTrigger("Attack");
         }
+    }
 
-        if (!isMoveToEnemy)
+    private void FixedUpdate()
+    {
+        if (IsVictory)
         {
-            turnCharactor.Key.transform.position = Vector3.MoveTowards(turnCharactor.Key.transform.position, turnCharactor.Value.NowPlayerLocation, 0.6f);
-            float distanceBaseLocation = (turnCharactor.Value.NowPlayerLocation - turnCharactor.Key.transform.position).sqrMagnitude;
-            if(distanceBaseLocation <= 0.01f)
-            {
-                turnCharactor.Key.GetComponent<Animator>().SetBool("isYourTurn", false);
-                IsDuringMotion = false;
-            }
+            Invoke("MoveToEndOfBattle", 2.5f);
         }
 
-        if (hasEndBattle)
+        if (IsLose)
         {
-            if (isVictory)
-            {
-                Invoke("MoveToEndOfBattle", 3.0f);
-            }
-
-            if (isLose)
-            {
-                Invoke("MoveToEndOfBattle", 1.0f);
-            }
+            Invoke("MoveToEndOfBattle", 1.0f);
         }
     }
 
     void MoveToEndOfBattle()
     {
-        if (isVictory)
+        if (IsVictory)
         {
             SceneManager.LoadScene("EndBattle");
         }
 
-        if (isLose)
+        if (IsLose)
         {
             fade.FadeIn(1.0f, () =>
             {

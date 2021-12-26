@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Laser
   - Kogoro
+  - RedDragon
+  - FlameComponent
   layers:
   - Default
   - TransparentFX

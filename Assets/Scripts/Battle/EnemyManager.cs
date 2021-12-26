@@ -7,13 +7,12 @@ using UnityEngine.UI;
 public class EnemyManager : MonoBehaviour
 {
     public GameObject Target;
-    public AudioSource AudioSource;
     public AudioClip AttackSound;
     public AudioClip DieSound;
 
-    public int MaxHp = 200;
-    public static int Hp = 200;
-    int attack = 15;
+    public int MaxHp;
+    public static int Hp;
+    public int Attack;
     float enemyAttackGage;
 
     void Start()
@@ -37,7 +36,7 @@ public class EnemyManager : MonoBehaviour
             {
                 PlayerAttackLocation = enemyAttackLocation,
                 NowPlayerLocation = nowEnemyLocation,
-                Attack = UnityEngine.Random.Range(attack - 5, attack + 5)
+                Attack = UnityEngine.Random.Range(Attack - (Attack / 10), Attack + (Attack / 10))
             };
             BattleManager.TurnOrders.Add(gameObject, locations);
             enemyAttackGage = 0;
@@ -57,7 +56,6 @@ public class EnemyManager : MonoBehaviour
     {
         var damage = BattleManager.TurnOrders.First().Value.Attack;
         Hp -= damage;
-        Debug.Log(Hp);
         if (Hp <= 0)
         {
             animator.SetBool("isDie", true);
@@ -66,8 +64,6 @@ public class EnemyManager : MonoBehaviour
 
             Invoke("DamageTextAnimationDie", 1.0f);
 
-            BattleManager.hasEndBattle = true;
-            BattleManager.isVictory = true;
             return;
         }
 
@@ -81,10 +77,10 @@ public class EnemyManager : MonoBehaviour
             damageText.text = damage.ToString();
 
             BattleManager.TurnOrders.Remove(BattleManager.TurnOrders.First().Key);
-            BattleManager.isMoveToEnemy = true;
 
             StartCoroutine(DelayCoroutine(1f, () => 
             {
+                BattleManager.IsDuringMotion = false;
                 damageText.enabled = false;
             }));
         }));
@@ -100,18 +96,19 @@ public class EnemyManager : MonoBehaviour
     {
         transform.Find("Canvas/DamageText").gameObject.GetComponent<Text>().enabled = true;
         transform.Find("Canvas/DamageText").gameObject.GetComponent<Text>().text = BattleManager.TurnOrders.First().Value.Attack.ToString();
-        BattleManager.TurnOrders.Remove(BattleManager.TurnOrders.First().Key);
-        BattleManager.isMoveToEnemy = true;
 
-        Invoke("HideDamageText", 1.0f);
+        BattleManager.TurnOrders.Remove(BattleManager.TurnOrders.First().Key);
+        BattleManager.IsDuringMotion = false;
+
         Invoke("HideEnemy", 1.0f);
 
     }
 
     private void HideEnemy()
     {
-        AudioSource.PlayOneShot(DieSound);
+        gameObject.GetComponent<AudioSource>().PlayOneShot(DieSound);
         this.gameObject.transform.Find("Slime").gameObject.SetActive(false);
         transform.Find("Canvas/DamageText").gameObject.GetComponent<Text>().enabled = false;
+        BattleManager.IsVictory = true;
     }
 }

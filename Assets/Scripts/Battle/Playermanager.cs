@@ -20,7 +20,7 @@ public class PlayerManager : MonoBehaviour
     public void ActiveCollider()
     {
         var animator = Target.GetComponent<Animator>();
-        var audioSource = Target.GetComponent<EnemyManager>().AudioSource;
+        var audioSource = Target.GetComponent<EnemyManager>().GetComponent<AudioSource>();
         var particleSystem = Target.GetComponent<EnemyManager>().GetComponent<ParticleSystem>();
         var damageText = Target.GetComponent<EnemyManager>().transform.Find("Canvas/DamageText").gameObject.GetComponent<Text>();
         Target.GetComponent<EnemyManager>().GetHit(animator, audioSource, AttackSound, particleSystem, damageText);
@@ -44,6 +44,7 @@ public class PlayerManager : MonoBehaviour
             animator.SetBool("isDie", true);
             particleSystem.Play();
             audioSource.PlayOneShot(audioClip);
+            BattleManager.IsLose = true;
 
             StartCoroutine(DelayCoroutine(1f, () =>
             {
@@ -51,8 +52,6 @@ public class PlayerManager : MonoBehaviour
                 damageText.text = damage.ToString();
             }));
 
-            BattleManager.hasEndBattle = true;
-            BattleManager.isLose = true;
             return;
         }
 
@@ -66,10 +65,12 @@ public class PlayerManager : MonoBehaviour
         {
             damageText.enabled = true;
             damageText.text = damage.ToString();
+
             BattleManager.TurnOrders.Remove(BattleManager.TurnOrders.First().Key);
-            BattleManager.isMoveToEnemy = true;
+
             StartCoroutine(DelayCoroutine(1f, () =>
             {
+                BattleManager.IsDuringMotion = false;
                 damageText.enabled = false;
             }));
         }));
