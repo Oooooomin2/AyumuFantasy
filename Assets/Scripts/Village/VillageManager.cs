@@ -17,11 +17,11 @@ public class VillageManager : MonoBehaviour
     {
         if (isTalking)
         {
-            Player.GetComponent<PlayerController>().MoveSpeed = 0;
+            Player.GetComponent<PlayerInVillageController>().MoveSpeed = 0;
             return;
         }
 
-        Player.GetComponent<PlayerController>().MoveSpeed = 3.5f;
+        Player.GetComponent<PlayerInVillageController>().MoveSpeed = 4.0f;
     }
 
     private void FixedUpdate()
@@ -30,7 +30,7 @@ public class VillageManager : MonoBehaviour
         if(distanceFromCenter > 1000.0f)
         {
             FieldManager.PlayerFieldLocation = new Vector3(59.0f, 0.0f, 135.0f);
-            Player.GetComponent<PlayerController>().MoveSpeed = 0;
+            Player.GetComponent<PlayerInVillageController>().MoveSpeed = 0;
             fade.FadeIn(0.5f, () =>
             {
                 SceneManager.LoadScene("SampleScene");

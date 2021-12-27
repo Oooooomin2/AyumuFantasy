@@ -10,12 +10,23 @@ public class PlayerManager : MonoBehaviour
     public AudioClip AttackSound;
     public Slider PlayerSlider;
     public Text PlayerHpText;
+    public Text PlayerMpText;
 
-    public static int MaxHp = 100;
-    public static int Hp = 100;
-    public static int MaxMp = 36;
-    public static int Mp = 36;
-    public static int Attack = 80;
+    public int MaxHp;
+    public static int Hp;
+    public int MaxMp;
+    public static int Mp;
+    public int AttackParent;
+    public static int Attack;
+
+    private void Start()
+    {
+        Hp = MaxHp;
+        Mp = MaxMp;
+        Attack = AttackParent;
+        PlayerHpText.text = MaxHp.ToString();
+        PlayerMpText.text = MaxMp.ToString();
+    }
 
     public void ActiveCollider()
     {

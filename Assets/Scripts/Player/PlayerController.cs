@@ -33,10 +33,9 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("Speed", 0);
         }
     }
-
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if(other.tag == "Village")
+        if(collision.collider.tag == "Village")
         {
             MoveSpeed = 0;
             fade.FadeIn(1.0f, () =>

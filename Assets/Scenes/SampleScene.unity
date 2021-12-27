@@ -281,6 +281,10 @@ GameObject:
   - component: {fileID: 561068582}
   - component: {fileID: 561068581}
   - component: {fileID: 561068583}
+  - component: {fileID: 561068587}
+  - component: {fileID: 561068586}
+  - component: {fileID: 561068585}
+  - component: {fileID: 561068584}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -475,6 +479,58 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 60, y: 11.1, z: 35}
   m_Center: {x: 95, y: 5, z: 35}
+--- !u!65 &561068584
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561068576}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 40, y: 11, z: 250}
+  m_Center: {x: 16.18, y: 2.81, z: 133.2}
+--- !u!65 &561068585
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561068576}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 430, y: 11, z: 30}
+  m_Center: {x: 243.4, y: 0, z: 259.4}
+--- !u!65 &561068586
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561068576}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 30, y: 11, z: 280}
+  m_Center: {x: 466.86, y: 0, z: 139.4}
+--- !u!65 &561068587
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561068576}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 350, y: 11, z: 30}
+  m_Center: {x: 288.01, y: 0, z: 14.1}
 --- !u!1 &643742151
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,7 +1636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1438c7bf173284b4791ab9415e8244d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2.5
+  MoveSpeed: 5.5
   fade: {fileID: 1224052632797085682}
 --- !u!1 &903829362420392812
 GameObject:
@@ -1606,7 +1662,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903829362420392808}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
   m_Height: 0.9
@@ -5807,6 +5863,13 @@ GameObject:
   - component: {fileID: 6493642445275138227}
   - component: {fileID: 6493642445275138226}
   - component: {fileID: 6493642445275138209}
+  - component: {fileID: 6493642445275138233}
+  - component: {fileID: 6493642445275138237}
+  - component: {fileID: 6493642445275138236}
+  - component: {fileID: 6493642445275138235}
+  - component: {fileID: 6493642445275138234}
+  - component: {fileID: 6493642445275138239}
+  - component: {fileID: 6493642445275138238}
   - component: {fileID: 6493642445275138206}
   m_Layer: 0
   m_Name: RedDragon
@@ -5824,14 +5887,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6493642445275138205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98f5f89242e80d42865cdf1912beda3, type: 3}
+  m_Script: {fileID: 11500000, guid: d3b4d2ce0fcd12448ab6b4492be6ca77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentBlock: {fileID: 6493642445275138207}
   suppressBlockAutoSelect: 0
   tagFilter: []
   FireOn: 1
-  colliderVar: {fileID: 0}
+  collisionVar: {fileID: 0}
 --- !u!114 &6493642445275138207
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -5846,7 +5909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 203
+    x: 202
     y: 307
     width: 159
     height: 40
@@ -5857,6 +5920,7 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 6493642445275138206}
   commandList:
+  - {fileID: 6493642445275138237}
   - {fileID: 6493642445275138218}
   - {fileID: 6493642445275138216}
   - {fileID: 6493642445275138215}
@@ -5892,7 +5956,8 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
-  selectedBlocks: []
+  selectedBlocks:
+  - {fileID: 6493642445275138207}
   selectedCommands: []
   variables:
   - {fileID: 6493642445275138217}
@@ -5914,7 +5979,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6493642445275138205}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 8, y: 4, z: 20}
@@ -6031,6 +6096,8 @@ MonoBehaviour:
   - {fileID: 6493642445275138231}
   - {fileID: 6493642445275138232}
   - {fileID: 6493642445275138230}
+  - {fileID: 6493642445275138239}
+  - {fileID: 6493642445275138233}
   suppressAllAutoSelections: 0
 --- !u!114 &6493642445275138215
 MonoBehaviour:
@@ -6470,6 +6537,7 @@ MonoBehaviour:
   eventHandler: {fileID: 0}
   commandList:
   - {fileID: 6493642445275138226}
+  - {fileID: 6493642445275138234}
   suppressAllAutoSelections: 0
 --- !u!114 &6493642445275138224
 MonoBehaviour:
@@ -6486,7 +6554,7 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 535
-    y: 351.5
+    y: 350.5
     width: 160
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -6498,6 +6566,8 @@ MonoBehaviour:
   commandList:
   - {fileID: 6493642445275138228}
   - {fileID: 6493642445275138227}
+  - {fileID: 6493642445275138238}
+  - {fileID: 6493642445275138235}
   suppressAllAutoSelections: 0
 --- !u!114 &6493642445275138225
 MonoBehaviour:
@@ -6514,7 +6584,7 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 552
-    y: 266
+    y: 265
     width: 135
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -6525,6 +6595,7 @@ MonoBehaviour:
   eventHandler: {fileID: 0}
   commandList:
   - {fileID: 6493642445275138229}
+  - {fileID: 6493642445275138236}
   suppressAllAutoSelections: 0
 --- !u!114 &6493642445275138226
 MonoBehaviour:
@@ -6705,6 +6776,125 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
+--- !u!114 &6493642445275138233
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493642445275138205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a200dbd67304446a3019434503338a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 22
+  indentLevel: 0
+  targetObject: {fileID: 54126237}
+  methodName: BattleRedDragon
+  delay: 1
+--- !u!114 &6493642445275138234
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493642445275138205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a200dbd67304446a3019434503338a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 26
+  indentLevel: 0
+  targetObject: {fileID: 54126237}
+  methodName: EndTalkToRedDragon
+  delay: 0
+--- !u!114 &6493642445275138235
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493642445275138205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a200dbd67304446a3019434503338a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 25
+  indentLevel: 0
+  targetObject: {fileID: 54126237}
+  methodName: BattleRedDragon
+  delay: 1
+--- !u!114 &6493642445275138236
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493642445275138205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a200dbd67304446a3019434503338a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 24
+  indentLevel: 0
+  targetObject: {fileID: 54126237}
+  methodName: EndTalkToRedDragon
+  delay: 0
+--- !u!114 &6493642445275138237
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493642445275138205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a200dbd67304446a3019434503338a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 23
+  indentLevel: 0
+  targetObject: {fileID: 54126237}
+  methodName: TalkToRedDragon
+  delay: 0
+--- !u!114 &6493642445275138238
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493642445275138205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 616cd37e21c7645c58a89edf5abee56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 28
+  indentLevel: 0
+  duration: 0.5
+  amount: {x: 0.5, y: 0.5}
+  waitUntilFinished: 0
+--- !u!114 &6493642445275138239
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493642445275138205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 616cd37e21c7645c58a89edf5abee56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 27
+  indentLevel: 0
+  duration: 0.5
+  amount: {x: 0.5, y: 0.5}
+  waitUntilFinished: 0
 --- !u!1 &6493642445275140355
 GameObject:
   m_ObjectHideFlags: 0

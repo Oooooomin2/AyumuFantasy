@@ -3277,9 +3277,9 @@ MonoBehaviour:
   PlayerSlider: {fileID: 2129047838}
   PlayerHpText: {fileID: 1213974305}
   PlayerMpText: {fileID: 194830287}
-  MaxHp: 100
-  MaxMp: 36
-  AttackParent: 85
+  MaxHp: 9999
+  MaxMp: 999
+  AttackParent: 3000
 --- !u!199 &208625884973914587
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -10281,7 +10281,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.99959075, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -11034,7 +11034,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 20
+        scalar: 60
         minScalar: 30
         maxCurve:
           serializedVersion: 2

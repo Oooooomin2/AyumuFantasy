@@ -11,9 +11,13 @@ public class BattleManager : MonoBehaviour
     [SerializeField]
     Fade fade = null;
 
+    [SerializeField]
+    Fade fadeToEnding = null;
+
     public static bool IsDuringMotion;
     public static bool IsVictory;
     public static bool IsLose;
+    public static bool IsBoss;
 
     void Start()
     {
@@ -22,6 +26,7 @@ public class BattleManager : MonoBehaviour
         IsDuringMotion = false;
         IsVictory = false;
         IsLose = false;
+        IsBoss = false;
     }
 
     void Update()
@@ -47,6 +52,15 @@ public class BattleManager : MonoBehaviour
     {
         if (IsVictory)
         {
+            if(IsBoss)
+            {
+                IsVictory = false;
+                IsBoss = false;
+                VillageManager.isPowerUp = false;
+                Invoke("MoveToEndGame", 2.0f);
+                return;
+            }
+
             Invoke("MoveToEndOfBattle", 2.5f);
         }
 
@@ -70,5 +84,13 @@ public class BattleManager : MonoBehaviour
                 SceneManager.LoadScene("GameOver");
             });
         }
+    }
+
+    void MoveToEndGame()
+    {
+        fadeToEnding.FadeIn(1.5f, () =>
+        {
+            SceneManager.LoadScene("EndingRole");
+        });
     }
 }

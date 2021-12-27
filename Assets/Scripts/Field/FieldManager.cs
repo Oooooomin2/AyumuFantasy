@@ -25,15 +25,47 @@ public class FieldManager : MonoBehaviour
     void Update()
     {
         var playerSpeed = Player.GetComponent<Animator>().GetFloat("Speed");
-        var RateEncount = Random.Range(0, 1200);
+        var RateEncount = Random.Range(0, 1700);
         if(playerSpeed > 1.0f && RateEncount == 50)
         {
             PlayerFieldLocation = Player.transform.position;
             Player.GetComponent<PlayerController>().MoveSpeed = 0;
             fade.FadeIn(2.0f, () =>
             {
-                SceneManager.LoadScene("FightingToSlime");
+                if (VillageManager.isPowerUp)
+                {
+                    SceneManager.LoadScene("FightingToSlime_isPowerUp");
+                }
+                else
+                {
+                    SceneManager.LoadScene("FightingToSlime");
+                }
             });
         }
+    }
+
+    public void TalkToRedDragon()
+    {
+        Player.GetComponent<PlayerController>().MoveSpeed = 0;
+    }
+
+    public void EndTalkToRedDragon()
+    {
+        Player.GetComponent<PlayerController>().MoveSpeed = 5.5f;
+    }
+
+    public void BattleRedDragon()
+    {
+        fade.FadeIn(2.0f, () =>
+        {
+            if (VillageManager.isPowerUp)
+            {
+                SceneManager.LoadScene("FightingToRedDragon_isPowerUp");
+            }
+            else
+            {
+                SceneManager.LoadScene("FightingToRedDragon_isNotPowerUp");
+            }
+        });
     }
 }

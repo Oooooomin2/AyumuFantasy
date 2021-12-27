@@ -9,6 +9,7 @@ public class EnemyManager : MonoBehaviour
     public GameObject Target;
     public AudioClip AttackSound;
     public AudioClip DieSound;
+    public string EnemyName;
 
     public int MaxHp;
     public static int Hp;
@@ -99,7 +100,11 @@ public class EnemyManager : MonoBehaviour
 
         BattleManager.TurnOrders.Remove(BattleManager.TurnOrders.First().Key);
         BattleManager.IsDuringMotion = false;
-
+        if(gameObject.tag == "RedDragon")
+        {
+            Invoke("HideEnemy", 3.0f);
+            return;
+        }
         Invoke("HideEnemy", 1.0f);
 
     }
@@ -107,8 +112,12 @@ public class EnemyManager : MonoBehaviour
     private void HideEnemy()
     {
         gameObject.GetComponent<AudioSource>().PlayOneShot(DieSound);
-        this.gameObject.transform.Find("Slime").gameObject.SetActive(false);
+        this.gameObject.transform.Find(EnemyName).gameObject.SetActive(false);
         transform.Find("Canvas/DamageText").gameObject.GetComponent<Text>().enabled = false;
+        if (gameObject.tag == "RedDragon")
+        {
+            BattleManager.IsBoss = true;
+        }
         BattleManager.IsVictory = true;
     }
 }

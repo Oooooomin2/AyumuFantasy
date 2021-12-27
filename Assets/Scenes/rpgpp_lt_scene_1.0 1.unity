@@ -4020,7 +4020,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 522811750}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b52f31b058082524a96c60cf2f470113, type: 3}
+  m_Script: {fileID: 11500000, guid: 480dca6e833f3a448bcfc154c15a492a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 993139471668440498}
@@ -6404,7 +6404,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.97794116, g: 0.96583366, b: 0.8269355, a: 1}
+  m_Color: {r: 0.38679248, g: 0.11724195, b: 0.06385724, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -15963,8 +15963,8 @@ GameObject:
   - component: {fileID: 993139471668015506}
   - component: {fileID: 993139471675694634}
   - component: {fileID: 993139471668440499}
-  - component: {fileID: 993139471668440501}
   - component: {fileID: 993139471668440500}
+  - component: {fileID: 993139471668440501}
   m_Layer: 0
   m_Name: Ekard_Generic
   m_TagString: Player
@@ -16011,10 +16011,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 993139471668440498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1438c7bf173284b4791ab9415e8244d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cf01a25cdb145041aba6906071de69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3.5
+  MoveSpeed: 4
   fade: {fileID: 1852559555570898663}
 --- !u!1 &993139471668440504
 GameObject:
@@ -22131,8 +22131,9 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 7695095547603690248}
-  selectedCommands: []
+  - {fileID: 7695095547603690251}
+  selectedCommands:
+  - {fileID: 7695095547603690255}
   variables:
   - {fileID: 7695095547603690269}
   description: 
@@ -22186,8 +22187,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 102.89455
-    y: 281.96384
+    x: 97.57539
+    y: 284.0915
     width: 135.10638
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -22330,7 +22331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 13
   indentLevel: 0
-  storyText: "\u88C5\u5099\u304C\u5168\u3066\u65B0\u3057\u304F\u306A\u3063\u305F\uFF01\n\u30A2\u30A4\u30C6\u30E0\u3082\u624B\u306B\u5165\u308C\u305F\uFF01"
+  storyText: "\u88C5\u5099\u304C\u5168\u3066\u65B0\u3057\u304F\u306A\u3063\u305F\uFF01"
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
@@ -22374,7 +22375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 12
   indentLevel: 0
-  storyText: "\u3053\u308C\u306F\u3053\u306E\u6751\u306E\u6700\u9AD8\u306E\u88C5\u5099\u3068\u308F\u305A\u304B\u3060\u304C\u30A2\u30A4\u30C6\u30E0\u3060\u3002\u53D7\u3051\u53D6\u3063\u3066\u304F\u308C\u3002"
+  storyText: "\u3053\u308C\u306F\u3053\u306E\u6751\u306E\u6700\u9AD8\u306E\u88C5\u5099\u3060\u3002\u53D7\u3051\u53D6\u3063\u3066\u304F\u308C\u3002"
   description: 
   character: {fileID: 1079759568}
   portrait: {fileID: 21300000, guid: e6d036503a41d0f4e85fb0d7b206206e, type: 3}
