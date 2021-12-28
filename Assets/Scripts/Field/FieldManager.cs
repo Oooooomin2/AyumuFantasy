@@ -25,7 +25,7 @@ public class FieldManager : MonoBehaviour
     void Update()
     {
         var playerSpeed = Player.GetComponent<Animator>().GetFloat("Speed");
-        var RateEncount = Random.Range(0, 1700);
+        var RateEncount = Random.Range(0, 1400);
         if(playerSpeed > 1.0f && RateEncount == 50)
         {
             PlayerFieldLocation = Player.transform.position;
