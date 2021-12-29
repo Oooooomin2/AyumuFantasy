@@ -7,8 +7,6 @@ public class PlayerInVillageController : MonoBehaviour
 
     float xSpeed;
     float zSpeed;
-    [SerializeField]
-    Fade fade = null;
     Rigidbody rigidbody;
     Animator animator;
     private void Start()

@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
-    public static Dictionary<GameObject, TurnCharactorContext> TurnOrders;
+    public static Dictionary<GameObject, int> TurnOrders;
     public Canvas Canvas;
 
     [SerializeField]
@@ -21,7 +23,7 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
-        TurnOrders = new Dictionary<GameObject, TurnCharactorContext>();
+        TurnOrders = new Dictionary<GameObject, int>();
 
         IsDuringMotion = false;
         IsVictory = false;
@@ -40,12 +42,20 @@ public class BattleManager : MonoBehaviour
         }
 
         var turnCharactor = TurnOrders.First();
-
         if (!IsDuringMotion)
         {
             IsDuringMotion = true;
-            turnCharactor.Key.GetComponent<Animator>().SetTrigger("Attack");
+            StartCoroutine(DelayCoroutine(0.4f, () =>
+            {
+                turnCharactor.Key.GetComponent<Animator>().SetTrigger("Attack");
+            }));
         }
+    }
+
+    private IEnumerator DelayCoroutine(float seconds, Action action)
+    {
+        yield return new WaitForSeconds(seconds);
+        action?.Invoke();
     }
 
     private void FixedUpdate()
@@ -57,16 +67,24 @@ public class BattleManager : MonoBehaviour
                 IsVictory = false;
                 IsBoss = false;
                 VillageManager.isPowerUp = false;
-                Invoke("MoveToEndGame", 2.0f);
+                StartCoroutine(DelayCoroutine(2.0f, () =>
+                {
+                    MoveToEndGame();
+                }));
                 return;
             }
-
-            Invoke("MoveToEndOfBattle", 2.5f);
+            StartCoroutine(DelayCoroutine(2.0f, () =>
+            {
+                MoveToEndOfBattle();
+            }));
         }
 
         if (IsLose)
         {
-            Invoke("MoveToEndOfBattle", 1.0f);
+            StartCoroutine(DelayCoroutine(1.0f, () =>
+            {
+                MoveToEndOfBattle();
+            }));
         }
     }
 
@@ -74,12 +92,14 @@ public class BattleManager : MonoBehaviour
     {
         if (IsVictory)
         {
+            IsVictory = false;
             SceneManager.LoadScene("EndBattle");
         }
 
         if (IsLose)
         {
-            fade.FadeIn(1.0f, () =>
+            IsLose = false;
+            fade.FadeIn(2.0f, () =>
             {
                 SceneManager.LoadScene("GameOver");
             });

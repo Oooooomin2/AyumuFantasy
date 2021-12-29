@@ -30,16 +30,9 @@ public class EnemyManager : MonoBehaviour
         enemyAttackGage += 0.0025f;
         if(enemyAttackGage >= 1.0f)
         {
-            var nowEnemyLocation = transform.position;
-            var enemyAttackLocation = Target.transform.position - new Vector3(0.0f, 0.0f, 3.5f);
 
-            var locations = new TurnCharactorContext
-            {
-                PlayerAttackLocation = enemyAttackLocation,
-                NowPlayerLocation = nowEnemyLocation,
-                Attack = UnityEngine.Random.Range(Attack - (Attack / 10), Attack + (Attack / 10))
-            };
-            BattleManager.TurnOrders.Add(gameObject, locations);
+            var attack = UnityEngine.Random.Range(Attack - (Attack / 10), Attack + (Attack / 10));
+            BattleManager.TurnOrders.Add(gameObject, attack);
             enemyAttackGage = 0;
         }
     }
@@ -55,7 +48,7 @@ public class EnemyManager : MonoBehaviour
 
     public void GetHit(Animator animator, AudioSource audioSource, AudioClip audioClip, ParticleSystem particleSystem, Text damageText)
     {
-        var damage = BattleManager.TurnOrders.First().Value.Attack;
+        var damage = BattleManager.TurnOrders.First().Value;
         Hp -= damage;
         if (Hp <= 0)
         {
@@ -63,7 +56,10 @@ public class EnemyManager : MonoBehaviour
             particleSystem.Play();
             audioSource.PlayOneShot(audioClip);
 
-            Invoke("DamageTextAnimationDie", 1.0f);
+            StartCoroutine(DelayCoroutine(1f, () =>
+            {
+                DamageTextAnimationDie();
+            }));
 
             return;
         }
@@ -71,13 +67,13 @@ public class EnemyManager : MonoBehaviour
         animator.SetTrigger("GetHit");
         particleSystem.Play();
         audioSource.PlayOneShot(audioClip);
+        BattleManager.TurnOrders.Remove(BattleManager.TurnOrders.First().Key);
 
         StartCoroutine(DelayCoroutine(1f, () =>
         {
             damageText.enabled = true;
             damageText.text = damage.ToString();
 
-            BattleManager.TurnOrders.Remove(BattleManager.TurnOrders.First().Key);
 
             StartCoroutine(DelayCoroutine(1f, () => 
             {
@@ -96,17 +92,23 @@ public class EnemyManager : MonoBehaviour
     private void DamageTextAnimationDie()
     {
         transform.Find("Canvas/DamageText").gameObject.GetComponent<Text>().enabled = true;
-        transform.Find("Canvas/DamageText").gameObject.GetComponent<Text>().text = BattleManager.TurnOrders.First().Value.Attack.ToString();
+        transform.Find("Canvas/DamageText").gameObject.GetComponent<Text>().text = BattleManager.TurnOrders.First().Value.ToString();
 
         BattleManager.TurnOrders.Remove(BattleManager.TurnOrders.First().Key);
         BattleManager.IsDuringMotion = false;
         if(gameObject.tag == "RedDragon")
         {
             Invoke("HideEnemy", 3.0f);
+            StartCoroutine(DelayCoroutine(3.0f, () =>
+            {
+                HideEnemy();
+            }));
             return;
         }
-        Invoke("HideEnemy", 1.0f);
-
+        StartCoroutine(DelayCoroutine(1.0f, () =>
+        {
+            HideEnemy();
+        }));
     }
 
     private void HideEnemy()

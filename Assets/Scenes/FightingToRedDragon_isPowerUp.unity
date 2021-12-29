@@ -1313,7 +1313,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 915253561}
         m_TargetAssemblyTypeName: AttackButtonController, Assembly-CSharp
-        m_MethodName: AttackButton
+        m_MethodName: PushAttackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1375,7 +1375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 208625884973914582}
   Panel: {fileID: 1118920938}
-  Target: {fileID: 8078515692850345751}
+  AttackButton: {fileID: 915253558}
 --- !u!1 &1118920938
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,37 +1,31 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AttackButtonController : MonoBehaviour
 {
     public GameObject Player;
     public GameObject Panel;
-    public GameObject Target;
+    public Button AttackButton;
     public static bool HasPushButton = false;
 
-    public void AttackButton()
+    public void PushAttackButton()
     {
         HasPushButton = true;
         Panel.SetActive(false);
-        Invoke("SetAttackContext", 1.0f);
+
+        var attack = Random.Range(PlayerManager.Attack - 15, PlayerManager.Attack + 15);
+        BattleManager.TurnOrders.Add(Player, attack);
     }
 
-    public void SetAttackContext()
+    private void FixedUpdate()
     {
-        var nowPlayerLocation = Player.transform.position;
-        var playerAttackLocation = Target.transform.position - new Vector3(0.0f, 0.0f, -5.0f);
-
-        var charactorContext = new TurnCharactorContext
+        if (BattleManager.IsDuringMotion)
         {
-            PlayerAttackLocation = playerAttackLocation,
-            NowPlayerLocation = nowPlayerLocation,
-            Attack = Random.Range(PlayerManager.Attack - 15, PlayerManager.Attack + 15)
-        };
-        BattleManager.TurnOrders.Add(Player, charactorContext);
+            AttackButton.interactable = false;
+        }
+        else
+        {
+            AttackButton.interactable = true;
+        }
     }
-}
-
-public class TurnCharactorContext
-{
-    public Vector3 PlayerAttackLocation { get; set; }
-    public Vector3 NowPlayerLocation { get; set; }
-    public int Attack { get; set; }
 }

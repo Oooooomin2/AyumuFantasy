@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-
             transform.Rotate(0, -0.8f, 0);
         }
         

@@ -44,7 +44,7 @@ public class PlayerManager : MonoBehaviour
         ParticleSystem particleSystem,
         Text damageText)
     {
-        var damage = BattleManager.TurnOrders.First().Value.Attack;
+        var damage = BattleManager.TurnOrders.First().Value;
         Hp -= damage;
 
         if (Hp <= 0)
@@ -56,12 +56,8 @@ public class PlayerManager : MonoBehaviour
             particleSystem.Play();
             audioSource.PlayOneShot(audioClip);
             BattleManager.IsLose = true;
-
-            StartCoroutine(DelayCoroutine(1f, () =>
-            {
-                damageText.enabled = true;
-                damageText.text = damage.ToString();
-            }));
+            damageText.enabled = true;
+            damageText.text = damage.ToString();
 
             return;
         }
@@ -71,13 +67,13 @@ public class PlayerManager : MonoBehaviour
         animator.SetTrigger("GetHit");
         particleSystem.Play();
         audioSource.PlayOneShot(audioClip);
+        BattleManager.TurnOrders.Remove(BattleManager.TurnOrders.First().Key);
 
         StartCoroutine(DelayCoroutine(1f, () =>
         {
             damageText.enabled = true;
             damageText.text = damage.ToString();
 
-            BattleManager.TurnOrders.Remove(BattleManager.TurnOrders.First().Key);
 
             StartCoroutine(DelayCoroutine(1f, () =>
             {
