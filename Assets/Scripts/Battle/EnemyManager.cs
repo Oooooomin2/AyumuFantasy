@@ -27,7 +27,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (BattleManager.IsDuringMotion) return;
 
-        enemyAttackGage += 0.0015f;
+        enemyAttackGage += 0.0025f;
         if(enemyAttackGage >= 1.0f)
         {
             var nowEnemyLocation = transform.position;

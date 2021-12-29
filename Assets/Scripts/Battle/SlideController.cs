@@ -14,11 +14,11 @@ public class SlideController : MonoBehaviour
     }
 
     
-    void Update()
+    private void FixedUpdate()
     {
         if (BattleManager.IsDuringMotion) return;
 
-        playerSlider.value += 0.002f;
+        playerSlider.value += 0.004f;
         if(playerSlider.value == 1 && !AttackButtonController.HasPushButton)
         {
             PlayerPanel.SetActive(true);
