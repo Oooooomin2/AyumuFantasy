@@ -23,7 +23,7 @@ public class EndOfBattle : MonoBehaviour
         if (distance < 1.3f && !isEnd)
         {
             isEnd = true;
-            StartCoroutine(DelayCoroutine(0.5f, () =>
+            StartCoroutine(DelayCoroutine(1.0f, () =>
             {
                 BackToField();
             }));
@@ -32,7 +32,7 @@ public class EndOfBattle : MonoBehaviour
 
     private void BackToField()
     {
-        fade.FadeIn(0.8f, () =>
+        fade.FadeIn(1.5f, () =>
         {
             SceneManager.LoadScene("SampleScene");
         });
